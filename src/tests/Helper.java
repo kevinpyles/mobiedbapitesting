@@ -6,17 +6,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
-import org.junit.Test;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Helper{
@@ -72,130 +63,7 @@ public class Helper{
 		String releaseStatus = obj.getString("status");
 		System.out.println("status : " + releaseStatus);
 		assertEquals(expReleaseStatus, releaseStatus);
-	}
-
-	@Test
-	public void aptTesting() throws Exception {
-		try {
-			URL url = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=chicago&sensor=false&#8221;");
-						HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Accept", "application/json");
-
-			if (conn.getResponseCode() != 200) {
-				throw new RuntimeException(" HTTP error code : " + conn.getResponseCode());
-			}
-
-			Scanner scan = new Scanner(url.openStream());
-			String entireResponse = new String();
-			while (scan.hasNext())
-				entireResponse += scan.nextLine();
-
-			System.out.println("Response : "+entireResponse);
-
-			scan.close();
-
-			JSONObject obj = new JSONObject(entireResponse);
-			String responseCode = obj.getString("status");
-			System.out.println("status : " + responseCode);
-
-			JSONArray arr = obj.getJSONArray("results");
-			for (int i = 0; i < arr.length(); i++) {
-				String placeid = arr.getJSONObject(i).getString("place_id");
-				System.out.println("Place id : " + placeid);
-				String formatAddress = arr.getJSONObject(i).getString(
-						"formatted_address");
-				System.out.println("Address : " + formatAddress);
-
-//validating Address as per the requirement
-				if(formatAddress.equalsIgnoreCase("Chicago, IL, USA")){
-					System.out.println("Address is as Expected");
-				}else{
-					System.out.println("Address is not as Expected");
-				}
-			}
-
-			conn.disconnect();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-
-		} catch (IOException e) {
-
-			e.printStackTrace();
-
-		}
-
-	}
-	
-	/*
-	@Test
-	public void movieDBAPICall() throws Exception {
-		try {
-			//URL url = new URL("https://api.themoviedb.org/3/movie/315635?api_key=c38db9cf88e1a6d850d3268482e3ee28;");
-			URL url = new URL("https://api.themoviedb.org/3/movie/324849?api_key=c38db9cf88e1a6d850d3268482e3ee28;");
-						HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Accept", "application/json");
-
-			if (conn.getResponseCode() != 200) {
-				throw new RuntimeException(" HTTP error code : " + conn.getResponseCode());
-			}
-
-			Scanner scan = new Scanner(url.openStream());
-			String entireResponse = new String();
-			while (scan.hasNext())
-				entireResponse += scan.nextLine();
-
-			System.out.println("Response : "+entireResponse);
-
-			scan.close();
-
-			JSONObject obj = new JSONObject(entireResponse);
-			String releaseStatus = obj.getString("status");
-			System.out.println("status : " + releaseStatus);
-			
-			String originalTitle = obj.getString("original_title");
-			System.out.println("Original Title : " + originalTitle);
-
-			assertEquals("Spider-Man: Homecoming", originalTitle );
-			
-			if(originalTitle.equalsIgnoreCase("Spider-Man: Homecoming")){
-				System.out.println("Title matches");
-			}else{
-				System.out.println("Title does not match");
-			}
-			
-			/*
-			JSONArray arr = obj.getJSONArray("results");
-			for (int i = 0; i < arr.length(); i++) {
-				String originalTitle = arr.getJSONObject(i).getString("original_title");
-				System.out.println("Original Title : " + originalTitle);
-				String overview = arr.getJSONObject(i).getString(
-						"overview");
-				System.out.println("Overview : " + overview);
-
-//validating Address as per the requirement
-				if(originalTitle.equalsIgnoreCase("Murder She Said")){
-					System.out.println("Title does not match");
-				}else{
-					System.out.println("Title does not match");
-				}
-			}
-			
-
-			conn.disconnect();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-
-		} catch (IOException e) {
-
-			e.printStackTrace();
-
-		}
-
-	}
-	*/
-	
+	}	
 }
 
 //TODO
@@ -239,4 +107,5 @@ public class Helper{
  * 
  * Classes
  * getConnectionAndResponse(String movieID, String apiKey)
+ * GitHub repo: https://github.com/kevinpyles/moviedbapitesting.git
  * */
