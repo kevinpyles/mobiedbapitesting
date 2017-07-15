@@ -1,3 +1,5 @@
+//TESTS AND ANSWERS ARE FOUND IN "TheTests.java" file
+
 package tests;
 
 public class RunTests {

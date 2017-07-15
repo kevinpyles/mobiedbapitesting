@@ -1,3 +1,5 @@
+//This is the helper file for the test. 
+
 package tests;
 
 import static org.junit.Assert.assertEquals;
@@ -52,13 +54,15 @@ public class Helper{
 		
 	}
 
+	//Pass in an API response, and title and the test will check if the expected title is found in the response. 
 	public static void titleValidation(String response, String title) throws Exception{
 		JSONObject obj = new JSONObject(response);
 		String originalTitle = obj.getString("original_title");
 		assertEquals(title, originalTitle);
 	}
 	
-	public static void responseValidation(String response, String expReleaseStatus) throws Exception{
+	//Pass in an API response, and expected Release Status and test will check if that release status is correct for the movie.
+	public static void releaseValidation(String response, String expReleaseStatus) throws Exception{
 		JSONObject obj = new JSONObject(response);
 		String releaseStatus = obj.getString("status");
 		System.out.println("status : " + releaseStatus);
