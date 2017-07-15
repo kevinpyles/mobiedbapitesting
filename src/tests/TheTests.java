@@ -149,6 +149,7 @@ public class TheTests {
 		
 		String myResponse = Helper.getConnectionAndResponse("315635", apiKey);
 
+		//This line isn't necessary, but it is nice to see something happening when running tests. :-)
 		System.out.println("Response : "+ myResponse);
 			
 		Helper.titleValidation(myResponse, "Spider-Man: Homecoming");
@@ -159,6 +160,7 @@ public class TheTests {
 		
 		String myResponse = Helper.getConnectionAndResponse("315635", apiKey);
 		
+		//This line isn't necessary, but it is nice to see something happening when running tests. :-)
 		System.out.println("Response : " + myResponse);
 		
 		Helper.releaseValidation(myResponse, "Released");
